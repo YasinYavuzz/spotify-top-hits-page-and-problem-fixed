@@ -114,6 +114,7 @@ class _TopHitsState extends State<TopHits> {
                 width: double.infinity,
                 height: 350,
                 child: ListView.builder(
+                  padding: EdgeInsets.all(0),
                   // physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
