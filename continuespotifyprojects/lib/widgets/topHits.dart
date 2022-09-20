@@ -1,3 +1,4 @@
+import 'package:continuespotifyprojects/widgets/todayTopHit.dart';
 import 'package:flutter/material.dart';
 
 class TopHits extends StatefulWidget {
@@ -114,14 +115,30 @@ class _TopHitsState extends State<TopHits> {
                 width: double.infinity,
                 height: 350,
                 child: ListView.builder(
+                  
                   padding: EdgeInsets.all(0),
                   // physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: _albumPhoto.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(top: 0,bottom: 0),
+                    
+                    return GestureDetector(
+                      onTap: index == 2
+                        ? () {
+                            Navigator.push<void>(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const TodayTopHits(),
+                              ),
+                            );
+                          }
+                        : () {
+                            null;
+                          },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 0,bottom: 0),
                       // width: 100,
                       height: 100,
                       decoration: BoxDecoration(
@@ -129,53 +146,54 @@ class _TopHitsState extends State<TopHits> {
                               bottom: BorderSide(
                             color: Color(0xff202020),
                               ))),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 15),
-                            alignment: Alignment.center,
-                            child: Image.asset('${_albumPhoto[index]}'),
-                          ),
-                          Container(
-                            
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 30,right: 50),
-                                  child: Text(
-                                    '${_songName[index]}',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  margin: EdgeInsets.only(top: 5,right: 50),
-                                  child: Text(
-                                    '${_artists[index]}',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
-                                        ),
-                                  ),
-                                ),
-                              ],
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 15),
+                              alignment: Alignment.center,
+                              child: Image.asset('${_albumPhoto[index]}'),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 0,right: 10),
-                            child: index == 2 || index == 3 ? Image.asset('assets/topHitsEmptyHeart.png') : Image.asset('assets/topHitsGreenHeart.png')  
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 0,right: 15),
-                            child: Image.asset('assets/more-vertical.png'),
-                          ),
-                        ],
+                            Container(
+                              
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 30,right: 50),
+                                    child: Text(
+                                      '${_songName[index]}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    margin: EdgeInsets.only(top: 5,right: 50),
+                                    child: Text(
+                                      '${_artists[index]}',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 0,right: 10),
+                              child: index == 2 || index == 3 ? Image.asset('assets/topHitsEmptyHeart.png') : Image.asset('assets/topHitsGreenHeart.png')  
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 0,right: 15),
+                              child: Image.asset('assets/more-vertical.png'),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
