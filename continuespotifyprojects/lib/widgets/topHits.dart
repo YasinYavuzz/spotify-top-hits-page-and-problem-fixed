@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class TopHits extends StatefulWidget {
   const TopHits({super.key});
@@ -10,6 +8,10 @@ class TopHits extends StatefulWidget {
 }
 
 class _TopHitsState extends State<TopHits> {
+  List<String> _albumPhoto = ["assets/topHitsAlbum1.png","assets/topHitsAlbum2.png","assets/topHitsAlbum3.png","assets/topHitsAlbum4.png"]; 
+  List<String> _songName = ["STAY","Wishing Well","First Class","Unstable"]; 
+  List<String> _artists = ["The KID LAROI","Juice WRLD","Jack Harlow","Justin Bieber"]; 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +41,15 @@ class _TopHitsState extends State<TopHits> {
                   width: 390,
                   height: 370,
                   decoration: BoxDecoration(
-                    
-                    border: Border( 
+                    border: Border(
                         bottom: BorderSide(
                       color: Colors.grey,
                     )),
                   ),
-                  child: Image.asset('assets/topHitsImage.png',fit: BoxFit.cover,),
-                  
+                  child: Image.asset(
+                    'assets/topHitsImage.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Container(
                     margin: EdgeInsets.only(top: 250, left: 40),
@@ -93,6 +96,90 @@ class _TopHitsState extends State<TopHits> {
                   child: Image.asset('assets/topHitsPlay.png'),
                 )
               ],
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 25, bottom: 15),
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Featuring',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            MediaQuery.removePadding(
+              context:context,
+              child: SizedBox(
+                width: double.infinity,
+                height: 350,
+                child: ListView.builder(
+                  // physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: _albumPhoto.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 0,bottom: 0),
+                      // width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                            color: Color(0xff202020),
+                              ))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 15),
+                            alignment: Alignment.center,
+                            child: Image.asset('${_albumPhoto[index]}'),
+                          ),
+                          Container(
+                            
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 30,right: 50),
+                                  child: Text(
+                                    '${_songName[index]}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  margin: EdgeInsets.only(top: 5,right: 50),
+                                  child: Text(
+                                    '${_artists[index]}',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 0,right: 10),
+                            child: index == 2 || index == 3 ? Image.asset('assets/topHitsEmptyHeart.png') : Image.asset('assets/topHitsGreenHeart.png')  
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 0,right: 15),
+                            child: Image.asset('assets/more-vertical.png'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
             )
           ],
         ),
